@@ -6,4 +6,4 @@ jobs:
 
         steps:
             - name: Print message
-              run: echo "Hello, Demo for Github Action"g
+              run: echo "Hello, My name is Preeti Gupta"

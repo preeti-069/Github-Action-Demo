@@ -1,0 +1,88 @@
+#GitHub Actions:- GitHub Actions is a continuous integration and continuous delivery (CI/CD) platform and automation tool built directly into GitHub. It allows you to automate software development workflows, such as building, testing, and deploying your code, in response to events within your repository.
+
+#Core Concept:--
+
+Workflows in GitHub Actions are defined using YAML files stored in a .github/workflows directory in your repository. Key components include:
+ 
+1.Workflows: Configurable automated processes that run one or more jobs.
+
+2.Events: Specific activities, such as a push to a branch, a pull_request being opened, or an issue being created, that trigger a workflow run.
+
+3.Jobs: A set of steps that execute on the same runner (virtual machine or container). By default, jobs run in parallel.
+
+4.Steps: A sequence of tasks within a job. Each step can either run a custom shell script or use a pre-defined "action".
+
+5.Actions: Reusable units of code (JavaScript or Docker containers) that perform specific tasks, available from the GitHub Marketplace or created by the user.
+
+6.Runners: Servers that execute the jobs. GitHub provides hosted runners with Linux, macOS, and Windows operating systems, or you can use self-hosted runners. 
+
+#Common Uses:-
+1.Continuous Integration (CI): Automatically building and testing code on              every pull request.
+
+2.Continuous Delivery/Deployment (CD): Deploying applications to cloud providers like Azure, AWS, or GCP.
+
+3.Project Management Automation: Automatically adding labels to issues, welcoming first-time contributors, or managing project boards.
+
+4.Code Quality/Monitoring: Running vulnerability scans, performance tests, and sending notifications to Slack or Discord
+
+#Reference Link:-
+
+https://docs.github.com/en/actions/get-started/understand-github-actions
+
+
+
+#Workflow:-Any task we want do it after every changes done by us.
+
+
+
+#Structure of a yml file for node :-
+
+name: Node CI Demo
+on: push
+jobs: 
+   build:
+    runs-on: ubuntu-latest
+    
+    steps:
+       - name: Checkout code
+         uses: actions/checkout@v4
+
+       - name: Setup Node
+         uses: actions/setup-node@v4
+         with:
+            node-version: 18
+
+       -  name: Check Node version
+          run: node -v
+
+       -  name: Run Application  
+          run: node index.js    
+
+
+
+*Note:-If we want to build the code on multiple os or versions.
+
+    strategy:
+       matrix:
+              node-version: [18,20,22]
+       os:    [ubuntu-latest, windows-latest]
+
+#Cache Module:-
+
+
+- name: Cache Modules
+  uses: actions/cache@v4
+   with:
+     path: ~/.npm
+     key: ${{runner.os}}-npm  -${{hashFiles('**/package.json')}}
+
+
+#If we want to schedule any event->
+
+on: 
+ schedule:
+  -cron:'*****'     ('minutes,hour,date,month,weekday')
+         '09**1,
+
+if we want schedule for seven days
+       '09**1-7'
